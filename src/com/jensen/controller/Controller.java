@@ -1,5 +1,26 @@
 package com.jensen.controller;
 
-public class Controller {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import com.jensen.model.Model;
+import com.jensen.view.View;
+
+public class Controller implements ActionListener{
+	private Model model;
+	private View view;
+	
+	public Controller(Model model, View view){
+		this.model = model;
+		this.view = view;
+		view.setVisible(true);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e){
+		 if (e.getSource() == e) {
+			 
+		 }
+		 
+	}
+	
 }
