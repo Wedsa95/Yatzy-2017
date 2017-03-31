@@ -9,7 +9,7 @@ public class YatzyMain {
 	public static void main(String[] args) {
 	
 		Model model = new Model();
-		View view = new View();
+		View view = new View(3);
 	
 		Controller con = new Controller(model, view);
 	}
