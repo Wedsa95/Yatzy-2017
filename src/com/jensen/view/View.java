@@ -108,34 +108,7 @@ public class View extends JFrame{
 	
 	private void setupScoreName(){
 		for(int i = 0; i< 19; i++){
-			scoreNameLb[i] = new JLabel(" ");
-			//scoreNameLb[i].setHorizontalAlignment(SwingConstants.CENTER);
-			//scoreNameLb[i].setFont(new Font("Arial", Font.BOLD, 10));
-			//scoreNameLb[i].setBorder(BorderFactory.createLineBorder(Color.black));
-			//scoreNamePanel.add(scoreNameLb[i]);
-		}
-		scoreNameLb[0] = new JLabel("UPPER SECTION");
-		scoreNameLb[1] = new JLabel(Constants.ONES.name());
-		scoreNameLb[2] = new JLabel(Constants.TWOS.name());
-		scoreNameLb[3] = new JLabel(Constants.THREES.name());
-		scoreNameLb[4] = new JLabel(Constants.FOURS.name());
-		scoreNameLb[5] = new JLabel(Constants.FIVES.name());
-		scoreNameLb[6] = new JLabel(Constants.SIXES.name());
-		scoreNameLb[7] = new JLabel("Total Upper");
-		scoreNameLb[8] = new JLabel("LOWER SECTION");
-		scoreNameLb[9] = new JLabel(Constants.THREE_KIND.name());
-		scoreNameLb[10] = new JLabel(Constants.FOUR_KIND.name());
-		scoreNameLb[11] = new JLabel(Constants.FULL_HOUSE.name());
-		scoreNameLb[12] = new JLabel(Constants.S_STRIGHT.name());
-		scoreNameLb[13] = new JLabel(Constants.L_STRIGHT.name());
-		scoreNameLb[14] = new JLabel(Constants.YAHTZEE.name());
-		scoreNameLb[15] = new JLabel(Constants.CHANCE.name());
-		scoreNameLb[16] = new JLabel(Constants.Y_BONUS.name());
-		scoreNameLb[17] = new JLabel("Total Lower");
-		scoreNameLb[18] = new JLabel("Grand Total");
-		
-		for( int i=0; i<19; i++)
-		{
+			scoreNameLb[i] = new JLabel();
 			scoreNameLb[i].setHorizontalAlignment(SwingConstants.CENTER);
 			scoreNameLb[i].setFont(new Font("Arial", Font.BOLD, 10));
 			scoreNameLb[i].setBorder(BorderFactory.createLineBorder(Color.black));
