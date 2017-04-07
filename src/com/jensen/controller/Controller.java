@@ -13,7 +13,12 @@ public class Controller implements ActionListener{
 	public Controller(Model model, View view){
 		this.model = model;
 		this.view = view;
+		
+		
+		view.setupScoreName(model.getScoreName());
+		view.uppdateScore(model.getScoreBoard());
 		view.setVisible(true);
+		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e){

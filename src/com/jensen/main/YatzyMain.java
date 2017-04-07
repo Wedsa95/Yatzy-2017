@@ -7,9 +7,11 @@ import com.jensen.view.View;
 public class YatzyMain {
 
 	public static void main(String[] args) {
-	
-		Model model = new Model();
-		View view = new View(6);
+		
+		String[] names = {"jon","bon","jon","bon","jon","bon",};
+		int numberOfPlayers = names.length;
+		Model model = new Model(names);
+		View view = new View(numberOfPlayers);
 	
 		Controller con = new Controller(model, view);
 	}

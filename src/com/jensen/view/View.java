@@ -68,10 +68,6 @@ public class View extends JFrame{
 		tablePanel.add(scorePanel);
 		tablePanel.add(scoreNamePanel);
 		
-		setupScoreName();
-		uppdateScore();
-			
-		
 		botButtonPanel = new PanelCreator(50,100);	
 		FlowLayout flowLayout_1 = (FlowLayout) botButtonPanel.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
@@ -94,10 +90,10 @@ public class View extends JFrame{
 		this.pack();
 	}
 	
-	private void uppdateScore(){
+	public void uppdateScore(String[][] scoreBoard){
 			for(int i = 0; i<players; i++){
-				for(int j = 0; j < 19; j++){
-					scoreLb[i][j] = new JLabel("");
+				for(int j = 0; j < 18; j++){
+					scoreLb[i][j] = new JLabel(scoreBoard[i][j]);
 					scoreLb[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 					scoreLb[i][j].setFont(new Font("Arial", Font.BOLD, 10));
 					scoreLb[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
@@ -106,11 +102,11 @@ public class View extends JFrame{
 			}
 	}
 	
-	private void setupScoreName(){
-		for(int i = 0; i< 19; i++){
-			scoreNameLb[i] = new JLabel();
+	public void setupScoreName(String[] scoreName){
+		for(int i = 0; i< 18; i++){
+			scoreNameLb[i] = new JLabel(scoreName[i]);
 			scoreNameLb[i].setHorizontalAlignment(SwingConstants.CENTER);
-			scoreNameLb[i].setFont(new Font("Arial", Font.BOLD, 10));
+			scoreNameLb[i].setFont(new Font("Arial", Font.BOLD, 12));
 			scoreNameLb[i].setBorder(BorderFactory.createLineBorder(Color.black));
 			scoreNamePanel.add(scoreNameLb[i]);
 		}
