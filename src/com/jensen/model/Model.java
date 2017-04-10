@@ -2,7 +2,7 @@ package com.jensen.model;
 
 public class Model {
 	
-	private String[] scoreName = {"Namn", "Ettor" ,"Tvåer",
+	private String[] scoreName = {"Spelare", "Ettor" ,"Tvåer",
 								"Treor", "Fyror" ,"Femor",
 								"Sexor","Summa","Bonus", "Par", 
 								 "Två Par","Tre Tal", "Fyr Tal", 

@@ -5,7 +5,14 @@ import java.awt.event.ActionListener;
 
 import com.jensen.model.Model;
 import com.jensen.view.View;
-
+/**
+ * 
+ * @author Jonas
+ * 
+ * @version 0,01
+ * 
+ * @see Model , View
+ */
 public class Controller implements ActionListener{
 	private Model model;
 	private View view;
