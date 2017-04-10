@@ -15,7 +15,6 @@ import java.awt.FlowLayout;
 import java.awt.Component;
 import javax.swing.Box;
 
-import com.jensen.model.Constants;
 
 public class View extends JFrame{
 	

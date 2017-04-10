@@ -2,12 +2,12 @@ package com.jensen.model;
 
 public class Model {
 	
-	private String[] scoreName = {"Övre Delen", "Ettor" ,"Tvåer",
+	private String[] scoreName = {"Namn", "Ettor" ,"Tvåer",
 								"Treor", "Fyror" ,"Femor",
-								"Sexor","Nedere Del", "Par", 
+								"Sexor","Summa","Bonus", "Par", 
 								 "Två Par","Tre Tal", "Fyr Tal", 
 								 "Liten","Stor", "Fullt Hus", 
-								 "Chans","YATZY", "Total",}; 
+								 "Chans","YATZY", "Total"}; 
 	
 	private String[] playerName;
 	private int numberPlayers;
@@ -22,7 +22,7 @@ public class Model {
 		this.scoreBoard = new String[numberPlayers][19];
 		
 			for(int i = 0; i < numberPlayers; i++){
-				scoreBoard[0][i] = playerName[i];
+				scoreBoard[i][0] = playerName[i];
 			}
 		
 	}

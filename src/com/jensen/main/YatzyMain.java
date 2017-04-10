@@ -42,7 +42,7 @@ public class YatzyMain {
 	}
 	
 	
-	/**
+	/*
 	 * Input of players number
 	 */
 	public static int initNumberOfPlayers()
