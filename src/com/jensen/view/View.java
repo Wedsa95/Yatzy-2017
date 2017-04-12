@@ -2,31 +2,32 @@ package com.jensen.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import java.awt.FlowLayout;
-import java.awt.Component;
+import com.jensen.model.Dice;
+import com.jensen.model.Model;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-
-import java.awt.GridBagLayout;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-
-
+/**
+ * 
+ * @author Jonas
+ * 
+ * @version 0,01
+ * 
+ * @see Model , View
+ */
 public class View extends JFrame{
 	
 	private int players;
@@ -39,12 +40,14 @@ public class View extends JFrame{
 	private PanelCreator scorePanel;
 
 	private JButton[] diceBtn = new JButton[5];
+
 	private JButton rollBtn;
 	private JButton zeroBtn;
 	/*	Om vi behöver några av dom här
 	* 	private JButton nextPlayerBtn = new JButton("Nästa Spelare");
 	*/
 	private JLabel[][] scoreLb;
+	
 	private JLabel[] scoreNameLb = new JLabel[19];
 	private Component verticalStrut;
 	
@@ -62,10 +65,8 @@ public class View extends JFrame{
 		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		
-		dicePanel = new PanelCreator(150,300);
-		FlowLayout flowLayout = (FlowLayout) dicePanel.getLayout();
-		setupDiceBtn();
-			
+		dicePanel = new PanelCreator(150,300); 
+		dicePanel.getLayout();
 	
 		tablePanel = new PanelCreator(500,300);
 		tablePanel.setBackground(Color.PINK);
@@ -86,9 +87,9 @@ public class View extends JFrame{
 		FlowLayout flowLayout_1 = (FlowLayout) botButtonPanel.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		setupBottomBtn();
-		rollBtn = new JButton("Roll");
+		rollBtn = new JButton("Rulla Tärningarna");
 		rollBtn.setFont(new Font("Arial", Font.BOLD, 14));
-		zeroBtn = new JButton("setNull");
+		zeroBtn = new JButton("Sett ut nolla");
 		zeroBtn.setFont(new Font("Arial", Font.BOLD, 14));
 		botButtonPanel.add(rollBtn);
 		botButtonPanel.add(zeroBtn);
@@ -104,6 +105,14 @@ public class View extends JFrame{
 		this.pack();
 	}
 	
+	public JButton getRollBtn() {
+		return rollBtn;
+	}
+
+	public JButton getZeroBtn() {
+		return zeroBtn;
+	}
+
 	public void uppdateScore(String[][] scoreBoard){
 			for(int i = 0; i<players; i++){
 				for(int j = 0; j < 18; j++){
@@ -140,18 +149,25 @@ public class View extends JFrame{
 		}
 		
 	}
-	
-	private void setupDiceBtn(){
+	public void uppdateDiceBtn(Dice[] diceArray){
 		for (int i = 0;i < 5; i++){
-			diceBtn[i] = new JButton("1");
+			diceBtn[i] = new JButton(String.valueOf(diceArray[i].value()));
 			dicePanel.add(diceBtn[i]);
 		}
 	}
-	
 	private void setupBottomBtn(){
 		
 	}
 	private void setDiceBtn(int i, int y){
 		
+	}	
+	public JButton[] getDiceBtn() {
+		return diceBtn;
+	}
+	public int getPlayers() {
+		return players;
+	}
+	public JLabel[][] getScoreLb() {
+		return scoreLb;
 	}
 }

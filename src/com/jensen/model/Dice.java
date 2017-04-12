@@ -12,9 +12,10 @@ import java.util.Random;
 *		myNumber = myDice.value());
 */
 public class Dice {
-	private  Random rand;
-	private  int value;
-	private  int sides;
+	
+	private Random rand;
+	private int value;
+	private int sides;
 	
 	// Constructor for Dice-class
 	public Dice()
@@ -23,7 +24,7 @@ public class Dice {
 		rand = new Random();
 	}
 	
-   public  int value()
+   public int value()
 	{
 	   rand = new Random();
 	   value = rand.nextInt(sides) + 1;
