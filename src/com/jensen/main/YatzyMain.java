@@ -57,7 +57,14 @@ public class YatzyMain {
 			 while (nPlayers < 1 || nPlayers > 6)
 			 {
 				 numberOfPlayers = JOptionPane.showInputDialog(" Enter the number of player (1-6): ");
-				 nPlayers = Integer.parseInt(numberOfPlayers); 
+				 if (numberOfPlayers != null){
+					 nPlayers = Integer.parseInt(numberOfPlayers); 
+				 }
+				 else{
+					  JFrame frame = new JFrame();
+					  JOptionPane.showMessageDialog(frame, "Game is over", "Message",JOptionPane.INFORMATION_MESSAGE);
+					  System.exit(0); 
+				  }
 			 }
 			 cont = false;
 		  }
