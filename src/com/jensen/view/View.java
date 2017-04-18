@@ -58,7 +58,7 @@ public class View extends JFrame{
 		this.players = players;
 		this.scoreLb = new JLabel[players][19];
 		
-		this.setPreferredSize(new Dimension(800,600));
+		this.setPreferredSize(new Dimension(420+(60*players),600));
 		this.setResizable(false);
 		this.setTitle("Yatzy");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,22 +68,22 @@ public class View extends JFrame{
 		dicePanel = new PanelCreator(150,300); 
 		dicePanel.getLayout();
 	
-		tablePanel = new PanelCreator(500,300);
+		tablePanel = new PanelCreator();
 		tablePanel.setBackground(Color.PINK);
 		
 		tablePanel.setLayout(null);
-		scoreNamePanel = new PanelCreator(150,300);
+		scoreNamePanel = new PanelCreator();
 		scoreNamePanel.setBounds(6, 6, 100, 504);
 		scoreNamePanel.setLayout(new GridLayout(18, 0, 0, 0));
 		scorePanel = new PanelCreator();
-		scorePanel.setBounds(111, 6, 360, 504);
+		scorePanel.setBounds(111, 6, (players*60), 504);
 		tablePanel.add(scorePanel);
 		GridBagLayout gbl_scorePanel = new GridBagLayout();
 
 		scorePanel.setLayout(gbl_scorePanel);
 		tablePanel.add(scoreNamePanel);
 		
-		botButtonPanel = new PanelCreator(50,100);	
+		botButtonPanel = new PanelCreator();	
 		FlowLayout flowLayout_1 = (FlowLayout) botButtonPanel.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		setupBottomBtn();
