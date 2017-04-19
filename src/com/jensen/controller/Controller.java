@@ -20,9 +20,12 @@ public class Controller implements ActionListener, MouseListener{
 	private View view;
 	
 	public Controller(Model model, View view){
+		
+		
 		this.model = model;
 		this.view = view;
-
+		Correction corr = new Correction(model);
+		
 		view.setupScoreName(model.getScoreName());
 		view.uppdateScore(model.getScoreBoard());
 		view.uppdateDiceBtn(model.getDiceArray());
@@ -47,25 +50,43 @@ public class Controller implements ActionListener, MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e){
 		System.out.println(e);
-		if (e.getSource() == e) {
-			 
+		if (e.getSource() == view.getRollBtn()) {
+			model.rollCounter();
+			Correction.check(model.rollDice());
+			System.out.println("\n\nrollCounter: " + model.getRollCounter());
+			System.out.println("turn: " + model.getTurn());
 		}
 	}
 	@Override
     public void mouseClicked(MouseEvent e) {
 		System.out.println(e);
+		if (e.getSource() == view.getRollBtn()) {
+			
+		}
     }
 	@Override
 	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
+	
+	
+	
+
 	
 }
