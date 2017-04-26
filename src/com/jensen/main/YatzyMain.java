@@ -75,18 +75,24 @@ public class YatzyMain {
 		  do {
 			  
 				  nameOfPlayers = JOptionPane.showInputDialog(" Spelarens namn " + x);
-				 
-				  if(nameOfPlayers.equals(""))
-				  {
-					  JFrame frame = new JFrame();
+				 try {
+					 if(nameOfPlayers.equals(""))
+					 {
+						 JFrame frame = new JFrame();
 					  
-					  JOptionPane.showMessageDialog(frame, "Spelarens namn är tomt !!!",
+						 JOptionPane.showMessageDialog(frame, "Spelarens namn är tomt !!!",
 						   "Input error", JOptionPane.ERROR_MESSAGE); 
-				  }
-				  else
-				  {
-					  cont = false;
-				  }
+					 }
+					 else
+					 {
+						 cont = false;
+					 }
+				 }
+				 catch(Exception e)
+	              {
+	                 JOptionPane.showMessageDialog(null,"Spelet avslutas !!!","Input error", JOptionPane.ERROR_MESSAGE);
+	                 System.exit(0); 
+	              }
 		  } while(cont);
 		return nameOfPlayers.trim().toUpperCase();
 	  }
