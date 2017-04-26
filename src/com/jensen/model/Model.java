@@ -1,13 +1,11 @@
 package com.jensen.model;
 
+import java.awt.Color;
+
 import com.jensen.controller.Correction;
 
 public class Model {
 	
-	
-	
-	
-
 	private String[] scoreName =
 	{"Spelare", "Ettor" ,"Tvåer",
 	"Treor", "Fyror" ,"Femor",
@@ -21,28 +19,52 @@ public class Model {
 	//TaBort
 	private String[][] scoreBoard;
 	
-	//yoshi
-		public int[][] underlyingScoreboard = new int[19][6];
-		public boolean[][] placedOrNot = new boolean[19][6];
-		
-		static String value;
-		boolean state = true;
-		public static int rollCounter;
-		
-
-		private static int turn;
-		
-		private Dice[] diceArray = new Dice[5];
-		
-		public static int[] diceResult = new int[5];
-		//Boolean [] Controller 
-		public static boolean diceOne = true;
-		public static boolean diceTwo = true;
-		public static boolean diceThree = true;
-		public static boolean diceFour = true;
-		public static boolean diceFive = true;
+	//yoshi*
+	private Dice dice; // behövs?
 	
+	public int[][] underlyingScoreboard = new int[19][6];
+	public boolean[][] placedOrNot = new boolean[19][6];
+	public int booleanCounter;
+	public boolean continuePlaying = true;
+	public boolean placementDone = true;
+	public boolean resetDiceResult = false;
+	
+	public int gameCompleted = 0;
+	static String value;
+	boolean state = true;
+	public static int rollCounter;
+		
+	private static int turn;
+	
+	private Dice[] diceArray = new Dice[5];
+	
+	public static int[] diceResult = new int[5];
+	//Boolean [] Controller 
+	
+	public boolean diceThrow[] = new boolean[5];
+	//*yoshi
+		
 	public Model(String[] pN){
+		
+		//yoshi*
+		for(int i=0; i<19; i++){
+			for(int j=0; j<6; j++){
+				underlyingScoreboard[i][j] = -1;
+			}
+		}
+		for(int i=0; i<5; i++){
+			diceThrow[i]=true;
+		}
+		for(int i=0; i<6; i++){
+			placedOrNot[7][i] = true;
+		}
+		for(int i=0; i<6; i++){
+			placedOrNot[8][i] = true;
+		}
+		for(int i=0; i<6; i++){
+			placedOrNot[18][i] = true;
+		}
+		//*yoshi
 		
 		this.playerName = pN;
 		this.numberPlayers = playerName.length;
@@ -69,6 +91,11 @@ public class Model {
 		return scoreName;
 	}
 	
+	//yoshi*
+	public String getPlayerName(int i){
+		return playerName[i];
+	}
+	
 	public  void setScore(int score, int i, int j){
 		underlyingScoreboard[i][j] = score;
 	}
@@ -85,15 +112,153 @@ public class Model {
 			}
 		}
 	}
-	public  int getTurn(){
+	public void whosTurn(){
+		for(int i=0; i<6; i++){
+			placedOrNot[0][i] = false;
+		}
+		placedOrNot[0][turn] = true;
+	}
+	public void setNextInTurn(){
+		turn = turn + 1;
+		if(turn == numberPlayers){
+			turn = 0;
+		}
+	}
+	public int getTurn(){
 		return turn;
 	}
-
-	public int[] rollDice() {
-		// TODO Auto-generated method stub
-		return null;
+	public void continuePlay(){
+		for(int i=0; i<19; i++){
+			if(placedOrNot[i][getTurn()]){
+				booleanCounter = booleanCounter + 1;
+			}
+		}
+	}
+	public void roll() {
+		
+		Dice d = new Dice();
+		for(int i=0; i<5; i++){
+			if(diceThrow[i]){
+				diceResult[i] = d.value();
+			}
+		}
+	}
+	public int[] getRollResult() {
+		return diceResult;
+	}
+	public void setResetRollCounter(){
+		rollCounter = 0;
 	}
 	public int getRollCounter() {
 		return rollCounter;
 	}
+	public int getNumberPlayers(){
+		return numberPlayers;
+	}
+	public int[][] getUnderlyingScoreboard(){
+		return underlyingScoreboard;
+	}
+	public void setPlacedTrue(int i, int j){
+		placedOrNot[i][j] = true;
+	}
+	public void setDiceThrow(int i, boolean b){
+		diceThrow[i] = b;
+	}
+	public boolean getDiceThrow(int i){
+		return diceThrow[i];
+	}
+	public boolean getPlaced(int i, int j){
+		return placedOrNot[i][j];
+	}
+	public void continuePlaying(){
+		if(getRollCounter() == 3){
+			continuePlaying = false;
+		}
+	}
+	public boolean getContinuePlaying(){
+		return continuePlaying;
+	}
+	public void setContinuePlaying(boolean b){
+		continuePlaying = b;
+	}
+	public void setPlacementDone(boolean b){
+		placementDone = b;
+	}
+	public boolean getPlacementDone(){
+		return placementDone;
+	}
+	public void setResetDiceResult(boolean b){
+		resetDiceResult = b;
+	}
+	public boolean getResetDiceResult(){
+		return resetDiceResult;
+	}
+	public void incrementGameCompleted(){
+		gameCompleted = gameCompleted + 1;
+	}
+	public int getGameCompleted(){
+		return gameCompleted;
+	}
+	public void bonusSum(){
+		for(int k=0; k<6; k++){
+			underlyingScoreboard[7][k] = 0;
+		}
+		for(int i=1; i<7; i++){
+			for(int j=0; j<6; j++){
+				if(placedOrNot[i][j]){
+					underlyingScoreboard[7][j] = underlyingScoreboard[7][j] + underlyingScoreboard[i][j];
+				}
+			}
+		}
+	}
+	public int getBonusSum(int i){
+		return underlyingScoreboard[7][i];
+	}
+	public void totalSum(){
+		for(int k=0; k<6; k++){
+			underlyingScoreboard[18][k] = 0;
+		}
+		for(int i=1; i<7; i++){
+			for(int j=0; j<6; j++){
+				if(placedOrNot[i][j]){
+					underlyingScoreboard[18][j] = underlyingScoreboard[18][j] + underlyingScoreboard[i][j];
+				}
+			}
+		}
+		for(int i=8; i<18; i++){
+			for(int j=0; j<6; j++){
+				if(placedOrNot[i][j]){
+					underlyingScoreboard[18][j] = underlyingScoreboard[18][j] + underlyingScoreboard[i][j];
+				}
+			}
+		}
+	}
+	public boolean gameComplete(){
+		for(int i=1; i<19; i++){
+			for(int j=0; j<numberPlayers; j++){
+				if(!placedOrNot[i][j]){
+					gameCompleted = gameCompleted + 1;
+				}
+			}
+		}
+		if(gameCompleted == 0){
+			return true;
+		}
+		else{
+			gameCompleted = 0;
+			return false;
+		}
+	}
+	public int whoIsTheWinner(){
+		int winner = 0;
+		int winnerIndex = -1;
+		for(int i=0; i<numberPlayers; i++){
+			if(underlyingScoreboard[18][i] > winner){
+				winner = underlyingScoreboard[18][i];
+				winnerIndex = i;
+			}
+		}
+		return winnerIndex;
+	}
+	//*yoshi
 }

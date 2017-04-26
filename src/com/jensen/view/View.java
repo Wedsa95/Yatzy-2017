@@ -66,17 +66,18 @@ public class View extends JFrame{
 		getContentPane().setLayout(new BorderLayout());
 		
 		dicePanel = new PanelCreator(150,300); 
+		dicePanel.setBackground(Color.GREEN);
 		dicePanel.getLayout();
 	
 		tablePanel = new PanelCreator();
-		tablePanel.setBackground(Color.PINK);
+		tablePanel.setBackground(Color.GREEN);
 		
 		tablePanel.setLayout(null);
 		scoreNamePanel = new PanelCreator();
-		scoreNamePanel.setBounds(6, 6, 100, 504);
-		scoreNamePanel.setLayout(new GridLayout(18, 0, 0, 0));
+		scoreNamePanel.setBounds(6, 6, 100, 532); //ändrade till 532 från 504
+		scoreNamePanel.setLayout(new GridLayout(19, 0, 0, 0)); //ändrade till 19 från 18
 		scorePanel = new PanelCreator();
-		scorePanel.setBounds(111, 6, (players*60), 504);
+		scorePanel.setBounds(111, 6, (players*60), 532); //ändrade till 532 från 504
 		tablePanel.add(scorePanel);
 		GridBagLayout gbl_scorePanel = new GridBagLayout();
 
@@ -84,6 +85,7 @@ public class View extends JFrame{
 		tablePanel.add(scoreNamePanel);
 		
 		botButtonPanel = new PanelCreator();	
+		botButtonPanel.setBackground(Color.GREEN);
 		FlowLayout flowLayout_1 = (FlowLayout) botButtonPanel.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		setupBottomBtn();
@@ -103,6 +105,7 @@ public class View extends JFrame{
 		getContentPane().add(tablePanel, BorderLayout.CENTER);
 		
 		this.pack();
+		
 	}
 	
 	public JButton getRollBtn() {
@@ -115,8 +118,8 @@ public class View extends JFrame{
 
 	public void uppdateScore(String[][] scoreBoard){
 			for(int i = 0; i<players; i++){
-				for(int j = 0; j < 18; j++){
-					scoreLb[i][j] = new JLabel(scoreBoard[i][j]+i+""+j);
+				for(int j = 0; j < 19; j++){ //ändrade till 19 från 18
+					scoreLb[i][j] = new JLabel(scoreBoard[i][j]);
 					
 					scoreLb[i][j].setHorizontalAlignment(SwingConstants.CENTER);
 					scoreLb[i][j].setFont(new Font("Arial", Font.BOLD, 12));
@@ -132,6 +135,21 @@ public class View extends JFrame{
 			
 	}
 	
+	//yoshi*
+	public void updateScore(int[][] underlyingScoreboard){
+		for(int i=1; i<19; i++){
+			for(int j=0; j<players; j++){
+				if(!(underlyingScoreboard[i][j]==-1)){
+					scoreLb[j][i].setText(String.valueOf(underlyingScoreboard[i][j]));
+					//scoreLb[j][i].setForeground(Color.GREEN);
+				}
+				else{
+					scoreLb[j][i].setText("");
+				}
+			}
+		}
+	}
+	//*yoshi
 	private GridBagConstraints gridBagPosition(int i, int j){
 		pos.gridx = i;
 		pos.gridy = j;
@@ -139,7 +157,7 @@ public class View extends JFrame{
 		
 	}
 	public void setupScoreName(String[] scoreName){
-		for(int i = 0; i< 18; i++){
+		for(int i = 0; i< 19; i++){ //ändrade till 19 från 18
 			scoreNameLb[i] = new JLabel(scoreName[i]);
 			scoreNameLb[i].setHorizontalAlignment(SwingConstants.CENTER);
 			scoreNameLb[i].setFont(new Font("Arial", Font.BOLD, 12));
@@ -151,16 +169,18 @@ public class View extends JFrame{
 	}
 	public void uppdateDiceBtn(Dice[] diceArray){
 		for (int i = 0;i < 5; i++){
-			diceBtn[i] = new JButton(String.valueOf(diceArray[i].value()));
+			diceBtn[i] = new JButton("0");//tog bort String.valueOf(diceArray[i].value())); och ersatte med "0"
 			dicePanel.add(diceBtn[i]);
 		}
 	}
 	private void setupBottomBtn(){
 		
 	}
-	private void setDiceBtn(int i, int y){
-		
-	}	
+	//yoshi*
+	public void setDiceBtn(int i, int j){
+		diceBtn[i].setText(j + "");
+	}
+	//*yoshi
 	public JButton[] getDiceBtn() {
 		return diceBtn;
 	}

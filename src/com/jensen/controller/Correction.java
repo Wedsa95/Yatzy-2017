@@ -5,6 +5,7 @@ import com.jensen.model.Model;
 public class Correction {
 	
 	private static Model model;
+	
 	//converter
 	static int[] counter = new int[6];
     static int counter1;
@@ -14,11 +15,6 @@ public class Correction {
     static int counter5;
     static int counter6;
     
-    //check
-  	static String html1 = "<HTML>";
-  	static String html2 = "</HTML>";
-  	static String result = "";
-  	
     //one to six
     static int ones;
 	static int twos;
@@ -28,6 +24,9 @@ public class Correction {
 	static int sixes;
 	
 	//twoPair
+	static boolean[] twoPairOf = new boolean[15];
+	
+	/*
     static boolean twoPairOf1 = false;
     static boolean twoPairOf2 = false;
     static boolean twoPairOf3 = false;
@@ -43,7 +42,8 @@ public class Correction {
     static boolean twoPairOf13 = false;
     static boolean twoPairOf14 = false;
     static boolean twoPairOf15 = false;
-    
+    */
+	
     public Correction(Model model) {
     	this.model = model;
 
@@ -206,7 +206,7 @@ public class Correction {
   		for(int i=0; i<18; i++){
 			for(int j=0; j<6; j++){
 				if(!model.placedOrNot[i][j]){
-					model.setScore(0, i, j);
+					model.setScore(-1, i, j);
 				}
 			}
 		}
@@ -248,17 +248,14 @@ public class Correction {
   			}
   		
   		//Summa
-  		int sumOf1To6 = 0;
-  		for(int i=1; i<7; i++){
-  			if(model.placedOrNot[i][model.getTurn()]){
-  				sumOf1To6 = sumOf1To6 + model.getScore(i, model.getTurn());
-  			}
-  		}
-  		model.setScore(sumOf1To6, 7, model.getTurn());
+  		model.bonusSum();
   		
   		//Bonus
-  		if(model.getScore(7, model.getTurn())>63){
+  		if(model.getScore(7, model.getTurn())>=63){
   			model.setScore(50, 8, model.getTurn());
+  		}
+  		else if(model.getScore(7, model.getTurn())<63){
+  			model.setScore(0, 8, model.getTurn());
   		}
   		
   		//checking if pair
@@ -385,20 +382,10 @@ public class Correction {
   		}
   		
   		//Total
-  		int total = 0;
-  		for(int i=1; i<7; i++){
-  			if(model.placedOrNot[i][model.getTurn()]){
-  				total = total + model.getScore(i, model.getTurn());
-  			}
-  		}
-  		for(int i=9; i<18; i++){
-  			if(model.placedOrNot[i][model.getTurn()]){
-  				total = total + model.getScore(i, model.getTurn());
-  			}
-  		}
-  		model.setScore(total, 18, model.getTurn());
+  		model.totalSum();
   		
   		//printing the underlyging scoreboard in the console
+  		/*
   		for(int i=1; i<19; i++){
   			System.out.println("\n");
   			switch(i){
@@ -440,20 +427,286 @@ public class Correction {
 	  					break;
   			}
   			for(int j=0; j<6; j++){
-  				System.out.print("|" + model.underlyingScoreboard[i][j]);
+  				System.out.print("|" + /*model.placedOrNot[i]* / [j]model.underlyingScoreboard[i][j]);
   			}
   		}
+  		*/
   		
   		//reseting the counter to zero. Very important! IS NEEDED FOR IT TO FUNCTION CORRECTLY
   		for(int i=0; i<6; i++)
   			counter[i] = 0;
+  		
+  		for(int i=0; i<15; i++){
+  			twoPairOf[i] = false;
+  		}
   	}
   	
+//all the logic behind the correction of each and single possible combination you can get in a yatzy game
   	
-  	
-  	
-  	
-  	//all the logic behind the correction of each and single possible combination you can get in a yatzy game
+  	//checks chance
+	public static int chance(int[] counter){
+		return (counter[0]*1 + counter[1]*2 + counter[2]*3 + counter[3]*4 + counter[4]*5 + counter[5]*6); 
+	}
+	
+	//returns the sum of all ones (int)
+	public static int one(int[] counter){
+		for(int i=0; i<6; i++){
+			if(counter[0] == i){
+				ones = 1*i;
+			}
+		}
+		return ones;
+	}
+	
+	//returns the sum of all twos (int)
+	public static int two(int[] counter){
+		for(int i=0; i<6; i++){
+			if(counter[1] == i){
+				twos = 2*i;
+			}
+		}
+		return twos;
+	}
+	
+	//returns the sum of all threes (int)
+	public static int three(int[] counter){
+		for(int i=0; i<6; i++){
+			if(counter[2] == i){
+				threes = 3*i;
+			}
+		}
+		return threes;
+	}
+	
+	//returns the sum of all fours (int)
+	public static int four(int[] counter){
+		for(int i=0; i<6; i++){
+			if(counter[3] == i){
+				fours = 4*i;
+			}
+		}
+		return fours;
+	}
+	
+	//returns the sum of all fives (int)
+	public static int five(int[] counter){
+		for(int i=0; i<6; i++){
+			if(counter[4] == i){
+				fives = 5*i;
+			}
+		}
+		return fives;
+	}
+	
+	//returns the sum of all sixes (int)
+	public static int six(int[] counter){
+		for(int i=0; i<6; i++){
+			if(counter[5] == i){
+				sixes = 6*i;
+			}
+		}
+		return sixes;
+	}
+	
+	//checks pair
+	public static boolean pair(int[] counter){
+        if (counter[0]>=2 || counter[1]>=2 || counter[2]>=2 || counter[3]>=2 || counter[4]>=2 || counter[5]>=2)
+            return true;
+        else
+            return false;
+    }
+	
+	//checks pair of
+    public static int pairOf(int[] counter){
+    	int pairOf = 0;
+    	if (pair(counter)==true) {
+            for(int i=0, j=1; i<6; i++, j++){
+            	if (counter[i]>=2)
+                    pairOf = j;
+            }
+        }
+    	return pairOf;
+    }
+    
+    //checks pair of, when also there is full house
+    public static int pairOfHouse(int[] counter){
+    	int pairOf = 0;
+    	if (pair(counter)==true) {
+    		for(int i=0, j=1; i<6; i++, j++){
+    			if (counter[i]==2)
+                    pairOf = j;
+            }
+        }
+    	return pairOf;
+    }
+    
+    //checks two pair
+    public static boolean twoPair(int[] counter){
+        
+        if(fullHouse(counter)==true){
+        	return true;
+    	}
+        for(int i=1, j=0; i<6; i++, j++){
+        	if(counter[0]==2 && counter[i]==2){
+            	twoPairOf[j] = true;
+            	return true;
+            }
+        }
+        for(int i=2, j=5; i<6; i++, j++){
+        	if(counter[1]==2 && counter[i]==2){
+            	twoPairOf[j] = true;
+            	return true;
+            }
+        }
+        for(int i=3, j=9; i<6; i++, j++){
+        	if(counter[2]==2 && counter[i]==2){
+            	twoPairOf[j] = true;
+            	return true;
+            }
+        }
+        for(int i=4, j=12; i<6; i++, j++){
+        	if(counter[3]==2 && counter[i]==2){
+            	twoPairOf[j] = true;
+            	return true;
+            }
+        }
+        if(counter[4]==2 && counter[5]==2){
+        	twoPairOf[14] = true;
+        	return true;
+        }
+        else
+        	return false;
+        
+    }
+    
+    //checks the first possible pair, when also there is two pair
+    public static int twoPairOf1(int[] counter){
+    	for(int i=0; i<5; i++){
+    		if(twoPairOf[i]==true)
+        		return 1;
+    	}
+    	for(int i=5; i<9; i++){
+    		if(twoPairOf[i]==true)
+        		return 2;
+    	}
+    	for(int i=9; i<12; i++){
+    		if(twoPairOf[i]==true)
+        		return 3;
+    	}
+    	for(int i=12; i<14; i++){
+    		if(twoPairOf[i]==true)
+        		return 4;
+    	}
+    	if(twoPairOf[14]==true)
+			return 5;
+    	
+    	else 
+    		return 0;
+    }
+    
+  //checks the second possible pair, when also there is two pair
+    public static int twoPairOf2(int[] counter){
+    	for(int i=0, j=2; i<5; i++, j++){
+    		if(twoPairOf[i]==true)
+        		return j;
+    	}
+    	for(int i=5, j=3; i<9; i++, j++){
+    		if(twoPairOf[i]==true)
+    			return j;
+    	}
+    	for(int i=9, j=4; i<12; i++, j++){
+    		if(twoPairOf[i]==true)
+    			return j;
+    	}
+    	for(int i=12, j=5; i<14; i++, j++){
+    		if(twoPairOf[i]==true)
+    			return j;
+    	}
+    	if(twoPairOf[14]==true)
+    		return 6;
+    	
+    	else 
+    		return 0;
+    }
+    
+    //checks three of a kind
+    public static boolean threeOfAKind(int[] counter){
+        if (counter[0]>=3 || counter[1]>=3 || counter[2]>=3 || counter[3]>=3 || counter[4]>=3 || counter[5]>=3)
+            return true;
+        else
+            return false;
+    }
+    
+    //checks three of
+    public static int threeOf(int[] counter){
+        int threeOf = 0;
+        if (threeOfAKind(counter)==true) {
+        	for(int i=0, j=1; i<6; i++, j++){
+        		if (counter[i]>=3)
+                    threeOf = j;
+			}
+        }
+        return threeOf;
+    }
+    
+    //checks four of a kind
+    public static boolean fourOfAKind(int[] counter){
+		if (counter[0]>=4 || counter[1]>=4 || counter[2]>=4 || counter[3]>=4 || counter[4]>=4 || counter[5]>=4)
+			return true;
+		else
+			return false;
+	}
+    
+    //checks four of
+	public static int fourOf(int[] counter){
+		int fourOf = 0;
+		if (fourOfAKind(counter)==true) {
+			for(int i=0, j=1; i<6; i++, j++){
+				if (counter[i]>=4)
+					fourOf = j;
+			}
+		}
+		return fourOf;
+	}
+	
+	//checks yatzy
+	public static boolean yatzy(int[] counter){
+        if (counter[0]==5 || counter[1]==5 || counter[2]==5 || counter[3]==5 || counter[4]==5 || counter[5]==5)
+            return true;
+        else
+            return false;
+    }
+	
+	//checks small straight
+	public static boolean smallStraight(int[] counter) {
+        
+        if (counter[0]==1 && counter[1]==1 && counter[2]==1 && counter[3]==1 && counter[4]==1)
+            return true;
+        else 
+            return false;
+    }
+	
+	//checks large straight
+	public static boolean largeStraight(int[] counter) {
+        
+        if (counter[1]==1 && counter[2]==1 && counter[3]==1 && counter[4]==1 && counter[5]==1)
+            return true;
+        else 
+            return false;
+    }
+	
+	//checks full house
+	public static boolean fullHouse(int[] counter){
+		if(threeOfAKind(counter)==true && (counter[0]==2 || counter[1]==2 || counter[2]==2 || counter[3]==2 || counter[4]==2 || counter[5]==2))
+			return true;
+		else
+			return false;
+	}
+}
+
+
+/*
+//all the logic behind the correction of each and single possible combination you can get in a yatzy game
   	
   	//checks chance
 	public static int chance(int[] counter){
@@ -867,4 +1120,5 @@ public class Correction {
 		else
 			return false;
 	}
-}
+ 
+*/

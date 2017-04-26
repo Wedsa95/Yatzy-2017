@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class YatzyMain {
-
+	
 	public static void main(String[] args) {
 		
 		int nPlayers = 0;
@@ -80,7 +80,7 @@ public class YatzyMain {
 		} while(cont);
 		 return nPlayers;
 		 
-	  } 
+	  }
 
 	public static String initPlayers(int x)
 	  {
@@ -104,6 +104,5 @@ public class YatzyMain {
 				  }
 		  } while(cont);
 		return nameOfPlayers.trim().toUpperCase();
-	  } 
-
+	  }
 }
