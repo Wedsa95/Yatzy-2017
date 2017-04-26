@@ -16,25 +16,11 @@ public class YatzyMain {
 		nPlayers = initNumberOfPlayers();
 		String[] playerNames = new String[nPlayers];
 		
-		//Players names
-		if(nPlayers == 1)
+		for(int i= 0; i < nPlayers; i++ )
 		{
-			int choice = JOptionPane.showConfirmDialog(null, "Will you play with computer?", null, JOptionPane.YES_NO_OPTION);
-			if(choice == JOptionPane.YES_OPTION){
-				playerNames[0] = initPlayers(1);
-				//TO DO play with computer
+			playerNames[i] = initPlayers(i+1);;
+		}
 				
-			} else if(choice == JOptionPane.NO_OPTION){
-				playerNames[0] = initPlayers(1);
-			}
-		}
-		else {
-			for(int i= 0; i < nPlayers; i++ )
-			{
-				playerNames[i] = initPlayers(i+1);;
-			}
-		}
-		
 		Model model = new Model(playerNames);
 		View view = new View(nPlayers);
 	
@@ -56,13 +42,13 @@ public class YatzyMain {
 		  
 			 while (nPlayers < 1 || nPlayers > 6)
 			 {
-				 numberOfPlayers = JOptionPane.showInputDialog(" Enter the number of player (1-6): ");
+				 numberOfPlayers = JOptionPane.showInputDialog(" Hur många spelare (1-6): ");
 				 if (numberOfPlayers != null){
 					 nPlayers = Integer.parseInt(numberOfPlayers); 
 				 }
 				 else{
 					  JFrame frame = new JFrame();
-					  JOptionPane.showMessageDialog(frame, "Game is over", "Message",JOptionPane.INFORMATION_MESSAGE);
+					  JOptionPane.showMessageDialog(frame, "Spelet avslutas", "Message",JOptionPane.INFORMATION_MESSAGE);
 					  System.exit(0); 
 				  }
 			 }
@@ -72,8 +58,7 @@ public class YatzyMain {
 		 {
 			 JFrame frame = new JFrame();
 			 			
-			 System.out.println("Illegal number, " + e); 
-			 JOptionPane.showMessageDialog(frame, "Illegal number of Players !!!",
+			 JOptionPane.showMessageDialog(frame, "Ogiltig antal spelare !!!",
 					    "Input error",
 					    JOptionPane.ERROR_MESSAGE);
 		 }
@@ -89,13 +74,13 @@ public class YatzyMain {
 		  
 		  do {
 			  
-				  nameOfPlayers = JOptionPane.showInputDialog(" Name for Player " + x);
+				  nameOfPlayers = JOptionPane.showInputDialog(" Spelarens namn " + x);
 				 
 				  if(nameOfPlayers.equals(""))
 				  {
 					  JFrame frame = new JFrame();
 					  
-					  JOptionPane.showMessageDialog(frame, "Players Name is empty !!!",
+					  JOptionPane.showMessageDialog(frame, "Spelarens namn är tomt !!!",
 						   "Input error", JOptionPane.ERROR_MESSAGE); 
 				  }
 				  else
