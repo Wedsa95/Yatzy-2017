@@ -1,9 +1,5 @@
 package com.jensen.model;
 
-import java.awt.Color;
-
-import com.jensen.controller.Correction;
-
 public class Model {
 	
 	private String[] scoreName =
@@ -16,6 +12,7 @@ public class Model {
 	
 	private String[] playerName;
 	private static int numberPlayers;
+	private Dice[] diceArray = new Dice[5];
 	//TaBort
 	private String[][] scoreBoard;
 	
@@ -28,20 +25,14 @@ public class Model {
 	public boolean continuePlaying = true;
 	public boolean placementDone = true;
 	public boolean resetDiceResult = false;
-	
+	public boolean onePlayerRule;
 	public int gameCompleted = 0;
-	static String value;
-	boolean state = true;
 	public static int rollCounter;
-		
 	private static int turn;
-	
-	private Dice[] diceArray = new Dice[5];
-	
+	public boolean diceThrow[] = new boolean[5];
 	public static int[] diceResult = new int[5];
 	//Boolean [] Controller 
-	
-	public boolean diceThrow[] = new boolean[5];
+
 	//*yoshi
 		
 	public Model(String[] pN){
@@ -135,7 +126,6 @@ public class Model {
 		}
 	}
 	public void roll() {
-		
 		Dice d = new Dice();
 		for(int i=0; i<5; i++){
 			if(diceThrow[i]){
@@ -175,11 +165,11 @@ public class Model {
 			continuePlaying = false;
 		}
 	}
-	public boolean getContinuePlaying(){
-		return continuePlaying;
-	}
 	public void setContinuePlaying(boolean b){
 		continuePlaying = b;
+	}
+	public boolean getContinuePlaying(){
+		return continuePlaying;
 	}
 	public void setPlacementDone(boolean b){
 		placementDone = b;
@@ -192,9 +182,6 @@ public class Model {
 	}
 	public boolean getResetDiceResult(){
 		return resetDiceResult;
-	}
-	public void incrementGameCompleted(){
-		gameCompleted = gameCompleted + 1;
 	}
 	public int getGameCompleted(){
 		return gameCompleted;
@@ -259,6 +246,12 @@ public class Model {
 			}
 		}
 		return winnerIndex;
+	}
+	public void setOnePlayerRule(boolean b){
+		onePlayerRule = b;
+	}
+	public boolean getOnePlayerRule(){
+		return onePlayerRule;
 	}
 	//*yoshi
 }
