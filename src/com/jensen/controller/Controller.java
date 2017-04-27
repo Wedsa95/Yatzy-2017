@@ -49,12 +49,10 @@ public class Controller implements ActionListener, MouseListener{
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == view.getRollBtn()) {
             if(model.gameComplete()){
-                JOptionPane.showMessageDialog(null, "Spelet är slut");
+                JOptionPane.showMessageDialog(null, "Spelet Ã¤r slut");
             }
             else{
-                if(model.getNumberPlayers()==1){
-                    model.setOnePlayerRule(true);
-                }
+                model.setOnePlayerRule(true);
                 if(model.getResetDiceResult()){
                     for(int k=0; k<5; k++){
                         model.setDiceThrow(k, true);
@@ -69,7 +67,7 @@ public class Controller implements ActionListener, MouseListener{
                     model.roll();
                     model.rollCounter();
                     model.whosTurn();
-                    view.getRollBtn().setText("Rulla Tärningarna " + "(" + model.getRollCounter() + ")" );
+                    view.getRollBtn().setText("Rulla TÃ¤rningarna " + "(" + model.getRollCounter() + ")" );
                     Correction.check(model.getRollResult());
                     view.updateScore(model.getUnderlyingScoreboard());
                     
@@ -78,7 +76,7 @@ public class Controller implements ActionListener, MouseListener{
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Vänligen välj");
+                    JOptionPane.showMessageDialog(null, "VÃ¤nligen vÃ¤lj");
                 }
                 
                 //sets the forgroundcolor to green for every placement and turn to green
@@ -119,7 +117,7 @@ public class Controller implements ActionListener, MouseListener{
                     else{
                         if(model.getOnePlayerRule()){
                             if(model.gameComplete()){
-                                JOptionPane.showMessageDialog(null, "Spelet är slut");
+                                JOptionPane.showMessageDialog(null, "Spelet Ã¤r slut");
                             }
                             if(!model.gameComplete()){
                                 if(model.getTurn() == i && model.getPlaced(0, model.getTurn())){
@@ -191,7 +189,7 @@ public class Controller implements ActionListener, MouseListener{
                                     }
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(null, "Det är inte din tur än");
+                                    JOptionPane.showMessageDialog(null, "Det Ã¤r inte din tur Ã¤n");
                                 }
                                 if(model.gameComplete()){
                                     JOptionPane.showMessageDialog(null, model.getPlayerName(model.whoIsTheWinner()) + " Vann!");
