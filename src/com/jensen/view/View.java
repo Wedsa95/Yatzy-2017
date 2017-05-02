@@ -21,7 +21,7 @@ import com.jensen.model.Dice;
 import com.jensen.model.Model;
 
 /**
- * @author Jonas, Yoshi
+ * @author Jonas, Takeyoshi
  * @version 1.0
  * 
  * @see Model , View
@@ -29,22 +29,18 @@ import com.jensen.model.Model;
 public class View extends JFrame{
 	
 	private int players;
-	
 	private GridBagConstraints pos = new GridBagConstraints();
 	private PanelCreator dicePanel; 
 	private PanelCreator tablePanel;
 	private PanelCreator botButtonPanel;
 	private PanelCreator scoreNamePanel;
 	private PanelCreator scorePanel;
-
 	private JButton[] diceBtn = new JButton[5];
-
 	private JButton rollBtn;
-	/*	Om vi behöver några av dom här
-	* 	private JButton nextPlayerBtn = new JButton("Nästa Spelare");
+	/*	Om vi behÃ¶ver nÃ¥gra av dom hÃ¤r
+	* 	private JButton nextPlayerBtn = new JButton("NÃ¤sta Spelare");
 	*/
 	private JLabel[][] scoreLb;
-	
 	private JLabel[] scoreNameLb = new JLabel[19];
 	
 	/**
@@ -73,10 +69,10 @@ public class View extends JFrame{
 		tablePanel.setLayout(null);
 		scoreNamePanel = new PanelCreator(100, 532);
 		scoreNamePanel.setBackground(Color.WHITE);
-		scoreNamePanel.setBounds(0, 0, 100, 532); //ändrade till 532 från 504
-		scoreNamePanel.setLayout(new GridLayout(19, 0, 0, 0)); //ändrade till 19 från 18
+		scoreNamePanel.setBounds(0, 0, 100, 532);
+		scoreNamePanel.setLayout(new GridLayout(19, 0, 0, 0));
 		scorePanel = new PanelCreator((players*60), 532);
-		scorePanel.setBounds(105, 0, (players*60), 532);//ändrade till 532 från 504
+		scorePanel.setBounds(105, 0, (players*60), 532);
 		scorePanel.setBackground(Color.WHITE);
 		tablePanel.add(scorePanel);
 		GridBagLayout gbl_scorePanel = new GridBagLayout();
@@ -90,7 +86,7 @@ public class View extends JFrame{
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		
 		//Roll Button
-		rollBtn = new JButton("Rulla Tärningarna");
+		rollBtn = new JButton("Rulla TÃ¤rningarna");
 		rollBtn.setBackground(Color.white);
 		rollBtn.setFont(new Font("Arial", Font.BOLD, 14));
 		botButtonPanel.add(rollBtn);
@@ -111,7 +107,7 @@ public class View extends JFrame{
 	 */
 	public void setUpScoreBoard(String[][] scoreBoard){
 			for(int i = 0; i<players; i++){
-				for(int j = 0; j < 19; j++){ //ändrade till 19 från 18
+				for(int j = 0; j < 19; j++){
 					scoreLb[i][j] = new JLabel(scoreBoard[i][j]);
 					
 					scoreLb[i][j].setHorizontalAlignment(SwingConstants.CENTER);
@@ -125,16 +121,18 @@ public class View extends JFrame{
 					scorePanel.add(scoreLb[i][j],gridBagPosition(i,j));
 				}
 			}
-			
 	}
 	
-	//yoshi*
+	/**
+	 * This method updates the visual scoreboard with the underlying scoreboard.
+	 * @param underlyingScoreboard
+	 * @see Model
+	 */
 	public void updateScore(int[][] underlyingScoreboard){
 		for(int i=1; i<19; i++){
 			for(int j=0; j<players; j++){
 				if(!(underlyingScoreboard[i][j]==-1)){
 					scoreLb[j][i].setText(String.valueOf(underlyingScoreboard[i][j]));
-					//scoreLb[j][i].setForeground(Color.GREEN);
 				}
 				else{
 					scoreLb[j][i].setText("");
@@ -142,7 +140,7 @@ public class View extends JFrame{
 			}
 		}
 	}
-	//*yoshi
+	
 	/**
 	 * This method creates a GridBagConstraints for a
 	 * GridBagLayout. The i and j values sets which position
@@ -163,7 +161,7 @@ public class View extends JFrame{
 	 * used to describe 
 	 */
 	public void setUpScoreName(String[] scoreName){
-		for(int i = 0; i< 19; i++){ //ändrade till 19 från 18
+		for(int i = 0; i< 19; i++){ //Ã¤ndrade till 19 frÃ¥n 18
 			scoreNameLb[i] = new JLabel(scoreName[i]);
 			scoreNameLb[i].setHorizontalAlignment(SwingConstants.CENTER);
 			scoreNameLb[i].setFont(new Font("Arial", Font.BOLD, 14));
@@ -187,20 +185,44 @@ public class View extends JFrame{
 			dicePanel.add(diceBtn[i]);
 		}
 	}
-	//yoshi*
+	
+	/**
+	 * This method assigns the dice button objects with a text.
+	 * @param i is an integer value representing which button (1-5).
+	 * @param j is an integer value representing the text, a dice result 1-6.
+	 */
 	public void setDiceBtn(int i, int j){
 		diceBtn[i].setText(j + "");
 	}
-	//*yoshi
+	
+	/**
+	 * This method return an array of JButton objects representing all the dice buttons.
+	 * @return an array of JButton objects representing all the dice buttons.
+	 */
 	public JButton[] getDiceBtn() {
 		return diceBtn;
 	}
+	
+	/**
+	 * This method returns an integer representing the amount of players participating.
+	 * @return an integer value representing the amount of players participating.
+	 */
 	public int getPlayers() {
 		return players;
 	}
+	
+	/**
+	 * This method returns a two dimensional array of JLabels object representing the scoreboard.
+	 * @return a two dimensional array of JLabels object representing the scoreboard.
+	 */
 	public JLabel[][] getScoreLb() {
 		return scoreLb;
 	}
+	
+	/**
+	 * This method returns JButton object that representing the roll button.
+	 * @return a JButton object that representing the roll button.
+	 */
 	public JButton getRollBtn() {
 		return rollBtn;
 	}
