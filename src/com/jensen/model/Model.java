@@ -156,7 +156,7 @@ public class Model {
 	 * This method generates all the dice numbers, (five dice each randomly 1-6).
 	 * @see Dice class.
 	 */
-	public void rollDice() {
+	public void roll() {
 		Dice dice = new Dice();
 		for(int i=0; i<5; i++){
 			if(diceThrow[i]){
