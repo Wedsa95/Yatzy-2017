@@ -46,7 +46,6 @@ public class View extends JFrame{
 	private JLabel[][] scoreLb;
 	
 	private JLabel[] scoreNameLb = new JLabel[19];
-	private Component verticalStrut;
 	
 	/**
 	 * @param players The number och players partisipating.
@@ -58,27 +57,26 @@ public class View extends JFrame{
 		this.players = players;
 		this.scoreLb = new JLabel[players][19];
 		
-		this.setPreferredSize(new Dimension(420+(60*players),600));
+		this.setPreferredSize(new Dimension(225+(60*players),600));
 		this.setResizable(false);
 		this.setTitle("Yatzy");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		
-		dicePanel = new PanelCreator(150,300); 
+		dicePanel = new PanelCreator(532,110); 
 		dicePanel.setBackground(Color.WHITE);
-		dicePanel.getLayout();
 	
-		tablePanel = new PanelCreator();
+		tablePanel = new PanelCreator(100+(players*60), 532);
 		tablePanel.setBackground(Color.WHITE);
 		
 		tablePanel.setLayout(null);
-		scoreNamePanel = new PanelCreator();
+		scoreNamePanel = new PanelCreator(100, 532);
 		scoreNamePanel.setBackground(Color.WHITE);
-		scoreNamePanel.setBounds(6, 0, 100, 532); //ändrade till 532 från 504
+		scoreNamePanel.setBounds(0, 0, 100, 532); //ändrade till 532 från 504
 		scoreNamePanel.setLayout(new GridLayout(19, 0, 0, 0)); //ändrade till 19 från 18
-		scorePanel = new PanelCreator();
-		scorePanel.setBounds(111, 0, (players*60), 532);//ändrade till 532 från 504
+		scorePanel = new PanelCreator((players*60), 532);
+		scorePanel.setBounds(105, 0, (players*60), 532);//ändrade till 532 från 504
 		scorePanel.setBackground(Color.WHITE);
 		tablePanel.add(scorePanel);
 		GridBagLayout gbl_scorePanel = new GridBagLayout();
@@ -86,18 +84,19 @@ public class View extends JFrame{
 		scorePanel.setLayout(gbl_scorePanel);
 		tablePanel.add(scoreNamePanel);
 		
-		botButtonPanel = new PanelCreator();	
+		botButtonPanel = new PanelCreator(35,225+(60*players));	
 		botButtonPanel.setBackground(Color.WHITE);
 		FlowLayout flowLayout_1 = (FlowLayout) botButtonPanel.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
+		
+		//Roll Button
 		rollBtn = new JButton("Rulla Tärningarna");
+		rollBtn.setBackground(Color.white);
 		rollBtn.setFont(new Font("Arial", Font.BOLD, 14));
 		botButtonPanel.add(rollBtn);
 
 		getContentPane().add(dicePanel,BorderLayout.WEST);
-		
-		verticalStrut = Box.createVerticalStrut(250);
-		dicePanel.add(verticalStrut);
+		dicePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		getContentPane().add(botButtonPanel, BorderLayout.PAGE_END);
 		getContentPane().add(tablePanel, BorderLayout.CENTER);
 		this.pack();
@@ -182,6 +181,9 @@ public class View extends JFrame{
 	public void setUpDiceBtn(Dice[] diceArray){
 		for (int i = 0;i < 5; i++){
 			diceBtn[i] = new JButton("0");//tog bort String.valueOf(diceArray[i].value())); och ersatte med "0"
+			diceBtn[i].setPreferredSize(new Dimension(100,100)); 
+			diceBtn[i].setBackground(Color.white);
+			diceBtn[i].setFont(new Font("Arial", Font.BOLD, 42));
 			dicePanel.add(diceBtn[i]);
 		}
 	}

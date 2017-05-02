@@ -22,7 +22,8 @@ public class Controller implements ActionListener, MouseListener{
     private View view;
     
     public Controller(Model model, View view){
-        
+     
+    	
         this.model = model;
         this.view = view;
         Correction corr = new Correction(model);
@@ -47,6 +48,7 @@ public class Controller implements ActionListener, MouseListener{
     }
     @Override
     public void actionPerformed(ActionEvent e){
+    	System.out.println("HEj");
         if (e.getSource() == view.getRollBtn()) {
             if(model.gameComplete()){
                 JOptionPane.showMessageDialog(null, "Spelet är slut");
@@ -83,7 +85,7 @@ public class Controller implements ActionListener, MouseListener{
                 for(int i=0; i<19; i++){
                     for(int j=0; j<model.getNumberPlayers(); j++){
                         if(model.getPlaced(i, j)){
-                            view.getScoreLb()[j][i].setForeground(Color.GREEN);
+                            view.getScoreLb()[j][i].setForeground(Color.BLUE);
                         }
                         else{
                             view.getScoreLb()[j][i].setForeground(Color.BLACK);
@@ -97,7 +99,7 @@ public class Controller implements ActionListener, MouseListener{
             if (e.getSource() == view.getDiceBtn()[i]) {
                 if(model.getDiceThrow(i)){
                     model.setDiceThrow(i, false);
-                    view.getDiceBtn()[i].setBackground(Color.GREEN);
+                    view.getDiceBtn()[i].setBackground(Color.BLUE);
                 }
                 else{
                     model.setDiceThrow(i, true);
@@ -117,7 +119,7 @@ public class Controller implements ActionListener, MouseListener{
                     else{
                         if(model.getOnePlayerRule()){
                             if(model.gameComplete()){
-                                JOptionPane.showMessageDialog(null, "Spelet är slut");
+                                JOptionPane.showMessageDialog(null, "Spelet �5r slut");
                             }
                             if(!model.gameComplete()){
                                 if(model.getTurn() == i && model.getPlaced(0, model.getTurn())){
@@ -143,7 +145,7 @@ public class Controller implements ActionListener, MouseListener{
                                                 for(int l=0; l<19; l++){
                                                     for(int m=0; m<model.getNumberPlayers(); m++){
                                                         if(model.getPlaced(l, m)){
-                                                            view.getScoreLb()[m][l].setForeground(Color.GREEN);
+                                                            view.getScoreLb()[m][l].setForeground(Color.BLUE);
                                                         }
                                                         else{
                                                             view.getScoreLb()[m][l].setForeground(Color.BLACK);
@@ -172,7 +174,7 @@ public class Controller implements ActionListener, MouseListener{
                                             for(int l=0; l<19; l++){
                                                 for(int m=0; m<model.getNumberPlayers(); m++){
                                                     if(model.getPlaced(l, m)){
-                                                        view.getScoreLb()[m][l].setForeground(Color.GREEN);
+                                                        view.getScoreLb()[m][l].setForeground(Color.BLUE);
                                                     }
                                                     else{
                                                         view.getScoreLb()[m][l].setForeground(Color.BLACK);
