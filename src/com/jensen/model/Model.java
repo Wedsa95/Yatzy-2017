@@ -118,6 +118,7 @@ public class Model {
 	public int getTurn(){
 		return turn;
 	}
+<<<<<<< HEAD
 	public void continuePlay(){
 		for(int i=0; i<19; i++){
 			if(placedOrNot[i][getTurn()]){
@@ -127,6 +128,15 @@ public class Model {
 	}
 	public void roll() {
 		Dice d = new Dice();
+=======
+	
+	/**
+	 * This method generates all the dice numbers, (five dice each randomly 1-6).
+	 * @see Dice class.
+	 */
+	public void roll() {
+		Dice dice = new Dice();
+>>>>>>> acb930e1f5d0ab7e2e1aa8e2c6380abc9753a12b
 		for(int i=0; i<5; i++){
 			if(diceThrow[i]){
 				diceResult[i] = d.value();
