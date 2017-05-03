@@ -9,9 +9,8 @@ import javax.swing.JOptionPane;
  * This  Class contains the  main- method which is used to start game, 
  * input for number of players and players name, create playerNames array with players name. 
  * 
- * @author Jonas, Takeyoshi, Sergej, Oskar
+ * @author Sergej, Jonas, Takeyoshi, Oskar
  * @version 1.0
- * 
  */
  
 public class YatzyMain {

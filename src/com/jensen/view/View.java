@@ -26,9 +26,6 @@ import com.jensen.model.Model;
  */
 public class View extends JFrame{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int players;
 	private GridBagConstraints pos = new GridBagConstraints();
@@ -39,13 +36,13 @@ public class View extends JFrame{
 	private PanelCreator scorePanel;
 	private JButton[] diceBtn = new JButton[5];
 	private JButton rollBtn;
-	/*	Om vi behöver några av dom här
-	* 	private JButton nextPlayerBtn = new JButton("Nästa Spelare");
-	*/
 	private JLabel[][] scoreLb;
 	private JLabel[] scoreNameLb = new JLabel[19];
 	
 	/**
+	 * This constructor receives a int that determines 
+	 * the amount of columns, the size of the JFrame 
+	 * and the size of the of several PanelCreator objekts.
 	 * @param players The number och players partisipating.
 	 */
 	public View(int players){

@@ -7,9 +7,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 /**
- * 
+ * This class extends JPanel. The things added to
+ * the JPanel is the paintComponent method that 
+ * adds a background to the panel.
  * @author Jonas
- *
+ * @see JPanel
  */
 public class PanelCreator extends JPanel{
 	
@@ -17,14 +19,18 @@ public class PanelCreator extends JPanel{
 	private int width;
 	private BufferedImage img;
 	
-	public PanelCreator(){
-	}
+	/**
+	 * This constructor receives a heigth and width.
+	 * And sets them as the heigth and width of the panel. 
+	 * @param heigth
+	 * @param width
+	 */
 	public PanelCreator(int heigth,int width){
 		super();
 		
 		this.heigth = heigth;
 		this.width = width;
-		this.setBackground(Color.WHITE);
+	//	this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(width, heigth));
 		 
 		try {
@@ -35,20 +41,16 @@ public class PanelCreator extends JPanel{
 		}
 	  
 	}
+	/**
+	 * This method draws the img on the panel.
+	 * @see paintComponent, Graphics
+	 */
 	//http://stackoverflow.com/questions/13791984/add-an-background-image-to-a-panel/13792503#13792503
-    @Override
-    public Dimension getPreferredSize() {
-        return img == null ? super.getPreferredSize() : new Dimension (width, heigth);
-    }
-
-   
 	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (img != null) {
-            int x = (getWidth() - img.getWidth()) / 2;
-            int y = (getHeight()- img.getHeight()) / 2;
-            g.drawImage(img, x, y, this);
+            g.drawImage(img, 0, 0, this);
         }
     }
     

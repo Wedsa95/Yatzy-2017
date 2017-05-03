@@ -9,12 +9,15 @@ import com.jensen.controller.Correction;
 import com.jensen.model.Model;
 import com.jensen.view.View;
 /**
- * 
+ * This class is the controller in the MVC
+ * design pattern. It Controlls the input from the 
+ * user and gives the instructions to the Model, View or
+ * the Correction classes. 
  * @author Jonas, Takeyoshi, Sergej, Oskar
  * 
  * @version 0.1
  * 
- * @see Model , View
+ * @see Model , View, Correction
  */
 public class Controller implements ActionListener, MouseListener{
     private Correction corr;
@@ -34,7 +37,9 @@ public class Controller implements ActionListener, MouseListener{
         view.setVisible(true);
     }
     /**
-     * 
+     * This class takes the objects it needs in the View class and
+     * add actionPerformed, mouseClicked to the objects.
+     * @see mouseClicked, actionPerformed, ActionEvent 
      */
     public void addListeners(){
         for (int i = 0; i < view.getPlayers(); i++){
