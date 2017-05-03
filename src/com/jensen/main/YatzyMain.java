@@ -6,10 +6,14 @@ import com.jensen.view.View;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
+ * This  Class contains the  main- method which is used to start game, 
+ * input for number of players and players name, create playerNames array with players name. 
  * 
- * @author Sergej
- *
+ * @author Jonas, Takeyoshi, Sergej, Oskar
+ * @version 1.0
+ * 
  */
+ 
 public class YatzyMain {
 	
 	public static void main(String[] args) {
@@ -32,8 +36,8 @@ public class YatzyMain {
 	}
 	
 	
-	/*
-	 * Input of players number
+	/**
+	 * This method is used for input of players number and validates input.
 	 */
 	public static int initNumberOfPlayers()
 	  {
@@ -71,6 +75,11 @@ public class YatzyMain {
 		 
 	  }
 
+	/**
+	 * This method is used for input of players names and validates input.
+	 * @param x  	the players number
+	 * 
+	 */
 	public static String initPlayers(int x)
 	  {
 		  String nameOfPlayers = "";
