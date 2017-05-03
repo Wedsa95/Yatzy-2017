@@ -2,7 +2,6 @@ package com.jensen.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -11,7 +10,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,6 +26,10 @@ import com.jensen.model.Model;
  */
 public class View extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int players;
 	private GridBagConstraints pos = new GridBagConstraints();
 	private PanelCreator dicePanel; 
@@ -86,7 +88,7 @@ public class View extends JFrame{
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		
 		//Roll Button
-		rollBtn = new JButton("Rulla TÃ¤rningarna");
+		rollBtn = new JButton("Rulla Tärningarna");
 		rollBtn.setBackground(Color.white);
 		rollBtn.setFont(new Font("Arial", Font.BOLD, 14));
 		botButtonPanel.add(rollBtn);
@@ -172,7 +174,8 @@ public class View extends JFrame{
 		
 	}
 	/**
-	 * This method draw a five button representations
+	 * This method draw a five button rep
+	 * resentations
 	 * of the Dice object. 
 	 * @param diceArray is a array och the object Dice.
 	 */

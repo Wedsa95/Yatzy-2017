@@ -6,7 +6,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+/**
+ * 
+ * @author Jonas
+ *
+ */
 public class PanelCreator extends JPanel{
 	
 	private int heigth; 

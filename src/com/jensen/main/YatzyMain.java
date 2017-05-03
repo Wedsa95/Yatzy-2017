@@ -5,7 +5,11 @@ import com.jensen.model.Model;
 import com.jensen.view.View;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+/**
+ * 
+ * @author Sergej
+ *
+ */
 public class YatzyMain {
 	
 	public static void main(String[] args) {

@@ -17,7 +17,7 @@ import com.jensen.view.View;
  * @see Model , View
  */
 public class Controller implements ActionListener, MouseListener{
-    
+    private Correction corr;
     private Model model;
     private View view;
     
@@ -26,13 +26,16 @@ public class Controller implements ActionListener, MouseListener{
     	
         this.model = model;
         this.view = view;
-        Correction corr = new Correction(model);
+        this.corr = new Correction(model);
         view.setUpScoreName(model.getScoreName());
         view.setUpScoreBoard(model.getScoreBoard());
         view.setUpDiceBtn(model.getDiceArray());
         addListeners();
         view.setVisible(true);
     }
+    /**
+     * 
+     */
     public void addListeners(){
         for (int i = 0; i < view.getPlayers(); i++){
             for(int j = 0; j < 18; j++){
@@ -50,7 +53,7 @@ public class Controller implements ActionListener, MouseListener{
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == view.getRollBtn()) {
             if(model.gameComplete()){
-                JOptionPane.showMessageDialog(null, "Spelet Ã¤r slut");
+                JOptionPane.showMessageDialog(null, "Spelet är slut");
             }
             else{
                 model.setOnePlayerRule(true);
@@ -68,7 +71,7 @@ public class Controller implements ActionListener, MouseListener{
                     model.roll();
                     model.rollCounter();
                     model.whosTurn();
-                    view.getRollBtn().setText("Rulla TÃ¤rningarna " + "(" + model.getRollCounter() + ")" );
+                    view.getRollBtn().setText("Rulla Tärningarna " + "(" + model.getRollCounter() + ")" );
                     Correction.check(model.getRollResult());
                     view.updateScore(model.getUnderlyingScoreboard());
                     
@@ -77,7 +80,7 @@ public class Controller implements ActionListener, MouseListener{
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "VÃ¤nligen vÃ¤lj");
+                    JOptionPane.showMessageDialog(null, "Vänligen välj");
                 }
                 
                 //sets the forgroundcolor to green for every placement and turn to green
@@ -97,7 +100,7 @@ public class Controller implements ActionListener, MouseListener{
             if (e.getSource() == view.getDiceBtn()[i]) {
                 if(model.getDiceThrow(i)){
                     model.setDiceThrow(i, false);
-                    view.getDiceBtn()[i].setBackground(Color.BLUE);
+                    view.getDiceBtn()[i].setBackground(new Color(66,134,244));
                 }
                 else{
                     model.setDiceThrow(i, true);
@@ -117,7 +120,7 @@ public class Controller implements ActionListener, MouseListener{
                     else{
                         if(model.getOnePlayerRule()){
                             if(model.gameComplete()){
-                                JOptionPane.showMessageDialog(null, "Spelet Ã¤r slut");
+                                JOptionPane.showMessageDialog(null, "Spelet är slut");
                             }
                             if(!model.gameComplete()){
                                 if(model.getTurn() == i && model.getPlaced(0, model.getTurn())){
@@ -185,7 +188,7 @@ public class Controller implements ActionListener, MouseListener{
                                     }
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(null, "Det Ã¤r inte din tur Ã¤n");
+                                    JOptionPane.showMessageDialog(null, "Det är inte din tur än");
                                 }
                                 if(model.gameComplete()){
                                     JOptionPane.showMessageDialog(null, model.getPlayerName(model.whoIsTheWinner()) + " Vann!");
