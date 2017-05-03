@@ -10,9 +10,9 @@ import com.jensen.model.Model;
 import com.jensen.view.View;
 /**
  * 
- * @author Jonas, Takeyoshi
+ * @author Jonas, Takeyoshi, Sergej, Oskar
  * 
- * @version 0,01
+ * @version 0.1
  * 
  * @see Model , View
  */
@@ -48,7 +48,6 @@ public class Controller implements ActionListener, MouseListener{
     }
     @Override
     public void actionPerformed(ActionEvent e){
-    	System.out.println("HEj");
         if (e.getSource() == view.getRollBtn()) {
             if(model.gameComplete()){
                 JOptionPane.showMessageDialog(null, "Spelet är slut");
@@ -94,7 +93,6 @@ public class Controller implements ActionListener, MouseListener{
                 }
             }
         }
-        //yoshi
         for(int i=0; i<5; i++){
             if (e.getSource() == view.getDiceBtn()[i]) {
                 if(model.getDiceThrow(i)){
@@ -119,25 +117,21 @@ public class Controller implements ActionListener, MouseListener{
                     else{
                         if(model.getOnePlayerRule()){
                             if(model.gameComplete()){
-                                JOptionPane.showMessageDialog(null, "Spelet �5r slut");
+                                JOptionPane.showMessageDialog(null, "Spelet är slut");
                             }
                             if(!model.gameComplete()){
                                 if(model.getTurn() == i && model.getPlaced(0, model.getTurn())){
                                     if(!model.getPlaced(j, model.getTurn())){
                                         if(model.getScore(j, model.getTurn()) == -1){
-                                            int selected = JOptionPane.showConfirmDialog(null, "Vill du nolla?", "hej", JOptionPane.YES_NO_OPTION);
-                                            System.out.println(selected);
+                                            int selected = JOptionPane.showConfirmDialog(null, "Vill du nolla?", "", JOptionPane.YES_NO_OPTION);
                                             if(selected == 0){
-                                                System.out.println("nolla");
                                                 model.setScore(0, j, model.getTurn());
-                                                
                                                 view.updateScore(model.getUnderlyingScoreboard());
                                                 model.setPlacementDone(true);
                                                 model.setPlacedTrue(j, i);
                                                 model.setNextInTurn();
                                                 model.setResetRollCounter();
                                                 model.setResetDiceResult(true);
-                                                
                                                 for(int k=0; k<5; k++){
                                                     model.setDiceThrow(k, true);
                                                     view.getDiceBtn()[k].setBackground(Color.WHITE);
