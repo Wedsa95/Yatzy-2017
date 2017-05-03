@@ -38,6 +38,7 @@ public class YatzyMain {
 	
 	/**
 	 * This method is used for input of players number and validates input.
+	 * @return 		the number of players
 	 */
 	public static int initNumberOfPlayers()
 	  {
@@ -78,7 +79,7 @@ public class YatzyMain {
 	/**
 	 * This method is used for input of players names and validates input.
 	 * @param x  	the players number
-	 * 
+	 * @return 		the players name
 	 */
 	public static String initPlayers(int x)
 	  {
